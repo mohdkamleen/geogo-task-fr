@@ -2,6 +2,7 @@ import React from 'react';
 import { Header } from 'antd/es/layout/layout'
 import { DeleteOutlined, DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, message, Popconfirm, Space } from 'antd';
+import { useNavigate } from 'react-router-dom';
 const items = [
   {
     key: 'profile',
@@ -34,12 +35,13 @@ const items = [
 ];
 
 const AdminHeader = () => {
+  const navigate = useNavigate()
   return (
     <>
 
       {/* header part of home page  */}
       <Header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(200,200,200,.2)" }}>
-        <img src="https://cms.geogo.in/wp-content/uploads/2021/02/geogo-logo-1.png" width={100} />
+        <img onClick={() => navigate("/")} src="https://cms.geogo.in/wp-content/uploads/2021/02/geogo-logo-1.png" width={100} />
         <Dropdown
           menu={{
             items,
