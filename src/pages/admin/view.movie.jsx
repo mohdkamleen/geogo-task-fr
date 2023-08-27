@@ -8,7 +8,7 @@ const ViewMovie = ({ data,onClose }) => {
     return (
         <> 
             <Drawer
-                open={data}
+                open
                 headerStyle={{ display: "none" }}
                 placement="bottom"
                 height={"80%"}

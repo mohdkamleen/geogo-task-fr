@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StarOutlined } from '@ant-design/icons';
-import { Button, Card, Col, Drawer, Input, Row, Select } from 'antd';
+import { Button, Card, Col, Drawer, Input, message, Row, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import { UpdateMovie } from '../../redux/slice/movie';
  
@@ -9,6 +9,16 @@ const EditMovie = ({ data, onClose }) => {
     const [formData, setformData] = useState(data)
     const dispatch = useDispatch()
     const handleUpdate = () => { 
+        if(!formData.poster) return message.warning("Poster is required")
+        if(!formData.ratings) return message.warning("Ratings is required")
+        if(!formData.runtime) return message.warning("Runtime is required")
+        if(!formData.movie_name) return message.warning("Movie name is required")
+        if(!formData.release_date) return message.warning("Release date is required")
+        if(!formData.director) return message.warning("Director is required")
+        if(!formData.producer) return message.warning("Producer is required")
+        if(formData.genre.length < 1) return message.warning("Tags are required")
+        if(!formData.type) return message.warning("Type is required")
+        if(!formData.description) return message.warning("Description is required")
         dispatch(UpdateMovie(formData._id,formData))
         onClose()
     }
@@ -33,7 +43,7 @@ const EditMovie = ({ data, onClose }) => {
                     cover={
                         <img
                             alt="example"
-                            src={data.poster}
+                            src={formData.poster}
                         />
                     } >
 

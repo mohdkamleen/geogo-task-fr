@@ -3,6 +3,7 @@ import { Avatar, Button, Input, Popconfirm, Segmented, Space, Table, Tag, Toolti
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteMovie } from '../../redux/slice/movie';
+import AddMovie from './add.movie';
 import EditMovie from './edit.movie';
 import Header from './header.component'
 import ViewMovie from './view.movie';
@@ -14,6 +15,7 @@ const Admin = () => {
   const [inputFilter, setInputFilter] = useState("")
   const [movieData, setMovieData] = useState()
   const [editMovie, setEditMovie] = useState()
+  const [addMovie, setAddMovie] = useState(false)
 
   const handleDelete = (id) => {
       dispatch(DeleteMovie(id))
@@ -100,7 +102,7 @@ const Admin = () => {
         />
         <Space>
           <Input placeholder='Search name' value={inputFilter} onChange={(e) => setInputFilter(e.target.value)} style={{ width: "250px" }} /> &nbsp;
-          <Button type='primary'>Create New</Button>
+          <Button type='primary' onClick={() => setAddMovie(true)}>Create New</Button>
         </Space>
       </div>
 
@@ -118,6 +120,7 @@ const Admin = () => {
 
       {movieData && <ViewMovie data={movieData} onClose={() => setMovieData()} />}
       {editMovie && <EditMovie data={editMovie} onClose={() => setEditMovie()} />}
+      {addMovie && <AddMovie onClose={() => setAddMovie(false)} />}
     </>
   )
 }

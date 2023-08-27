@@ -43,7 +43,7 @@ export const movieSlice = createSlice({
     },
 });
 
-export const AddMovie = (data) => movieHandler({ method: 'post', endpoint: 'movie/add', data });
+export const ADDMOVIE = (data) => movieHandler({ method: 'post', endpoint: 'movie/add', data });
 export const GetAllMovie = () => movieHandler({ method: 'get', endpoint: `movie` }); 
 export const GetCurrentMovie = (id) => movieHandler({ method: 'get', endpoint: `movie/${id}` }); 
 export const UpdateMovie = (id,data) => movieHandler({ method: 'patch', endpoint: `movie/${id}`, data });
