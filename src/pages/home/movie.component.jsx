@@ -25,7 +25,7 @@ const MovieCard = ({ data }) => {
                 actions={[
                      
                    watchList.map(e => e._id).includes(data._id)
-                   ? <HeartFilled key="fheart" onClick={() => dispatch(RemoveWatchList(data))} />
+                   ? <HeartFilled key="fheart" onClick={() => dispatch(RemoveWatchList(data._id))} />
                    : <HeartOutlined key="heart" onClick={() => dispatch(AddWatchList(data))} />,
                 
                     <span>{((data.runtime - data.runtime % 60) / 60 < 10 && "0") + (data.runtime - data.runtime % 60) / 60 + "h " + data.runtime % 60 + "m"}</span>,

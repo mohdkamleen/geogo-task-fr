@@ -32,7 +32,7 @@ export const movieSlice = createSlice({
             state.watchList.push(action.payload)
         },
         RemoveWatchList : (state, action) => {
-            state.watchList = state.watchList.filter(e => e !== action.payload)
+            state.watchList = state.watchList.filter(e => e._id !== action.payload)
         },
         ClearWatchList : (state, action) => {
             state.watchList = []
