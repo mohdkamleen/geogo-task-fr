@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, EyeOutlined, StarOutlined } from '@ant-design/icons';
-import { Avatar, Button, Input, Popconfirm, Segmented, Space, Table, Tag, Tooltip } from 'antd';
+import { Avatar, Button, Input, Popconfirm, Segmented, Select, Space, Table, Tag } from 'antd';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteMovie } from '../../redux/slice/movie';
@@ -11,14 +11,14 @@ import ViewMovie from './view.movie';
 const Admin = () => {
   const { loading, movie } = useSelector(state => state.movie)
   const dispatch = useDispatch()
-  const [filter, setFilter] = useState("All")
-  const [inputFilter, setInputFilter] = useState("")
+  const [filter, setFilter] = useState("All") 
+  const [genreFilter, setGenreFilter] = useState([])
   const [movieData, setMovieData] = useState()
   const [editMovie, setEditMovie] = useState()
   const [addMovie, setAddMovie] = useState(false)
 
   const handleDelete = (id) => {
-      dispatch(DeleteMovie(id))
+    dispatch(DeleteMovie(id))
   }
 
   const columns = [
@@ -74,7 +74,7 @@ const Admin = () => {
           <Button size='small' type='primary' onClick={() => setMovieData(data)}><EyeOutlined /></Button>
           <Button size='small' onClick={() => setEditMovie(data)}><EditOutlined /></Button>
           <Popconfirm
-            title="Delete Movie" 
+            title="Delete Movie"
             description={`Are you sure to delete ${data.movie_name}`}
             onConfirm={() => handleDelete(data._id)}
             placement="right"
@@ -101,7 +101,16 @@ const Admin = () => {
           onChange={setFilter}
         />
         <Space>
-          <Input placeholder='Search movie name' value={inputFilter} onChange={(e) => setInputFilter(e.target.value)} style={{ width: "250px" }} /> &nbsp;
+
+          <Select mode='multiple' onChange={(e) => setGenreFilter(e)} style={{ minWidth: "200px" }} placeholder="eg. Drama">
+            <Select.Option value="Drama" />
+            <Select.Option value="Romance" />
+            <Select.Option value="Crime" />
+            <Select.Option value="Sci-Fi" />
+            <Select.Option value="Action" />
+            <Select.Option value="Adventure" />
+            <Select.Option value="Comedy" />
+          </Select> &nbsp;
           <Button type='primary' onClick={() => setAddMovie(true)}>Create New</Button>
         </Space>
       </div>
@@ -110,8 +119,8 @@ const Admin = () => {
       <Table
         dataSource={
           movie?.length > 0 && movie
-            .filter(e => e.type === filter || (filter === "All" && e))
-            .filter(e => e.movie_name.toString().toLowerCase().indexOf(inputFilter.toLowerCase()) > -1)
+            .filter(e => e.type === filter || (filter === "All" && e)) 
+            .filter(e => e.genre.some((i, j) => i === genreFilter[j]) || (!genreFilter.length && e))
         }
         columns={columns}
         style={{ margin: "20px 5%" }}

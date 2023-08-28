@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StarOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Col, Drawer, Row, Tag } from 'antd';
-const { Meta } = Card;
+import { Button, Card, Col, Drawer, Row, Tag } from 'antd'; 
 
 const ViewMovie = ({ data,onClose }) => { 
 

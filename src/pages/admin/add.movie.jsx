@@ -77,11 +77,13 @@ const AddMovie = ({ onClose }) => {
                     <p><b>Producer : </b><Input.TextArea rows={2} placeholder="eg. sgas, abc, ofd" value={formData.producer} onChange={(e) => setformData({ ...formData, producer: e.target.value })} /></p>
                     <p><b>Tags : </b><br />
                         <Select mode='multiple' style={{ width: "100%" }} placeholder="eg. Drama" onChange={(e) => setformData({ ...formData, genre: e })}>
-                            <Select.Option value="Drama" />
-                            <Select.Option value="Romance" />
-                            <Select.Option value="Crime" />
-                            <Select.Option value="Sci-fi" />
-                            <Select.Option value="Action" />
+                    <Select.Option value="Drama" />
+                    <Select.Option value="Romance" />
+                    <Select.Option value="Crime" />
+                    <Select.Option value="Sci-Fi" />
+                    <Select.Option value="Action" />
+                    <Select.Option value="Adventure" /> 
+                    <Select.Option value="Comedy" />
                         </Select>
                     </p>
                     <p><b>Type : </b><br />

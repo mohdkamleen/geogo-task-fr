@@ -1,5 +1,4 @@
-import { Button, Empty, Input, Segmented, Spin } from 'antd'
-import { Header } from 'antd/es/layout/layout'
+import { Empty, Input, Segmented, Select, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import MovieCard from './movie.component'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { HeartFilled, HeartOutlined, StarOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Col, Drawer, Row, Space, Tag } from 'antd';
+import { Button, Card, Col, Drawer, Row, Space, Tag } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddWatchList, RemoveWatchList } from '../../redux/slice/movie';
 const { Meta } = Card;

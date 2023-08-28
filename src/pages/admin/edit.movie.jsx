@@ -64,11 +64,13 @@ const EditMovie = ({ data, onClose }) => {
                     <p><b>Producer : </b><Input.TextArea rows={2} value={formData.producer} onChange={(e) => setformData({ ...formData, producer: e.target.value })} /></p>
                     <p><b>Tags : </b><br />
                         <Select mode='multiple' style={{ width: "100%" }} value={formData.genre} onChange={(e) => setformData({ ...formData, genre: e })}>
-                            <Select.Option value="Drama" />
-                            <Select.Option value="Romance" />
-                            <Select.Option value="Crime" />
-                            <Select.Option value="Sci-fi" />
-                            <Select.Option value="Action" />
+                    <Select.Option value="Drama" />
+                    <Select.Option value="Romance" />
+                    <Select.Option value="Crime" />
+                    <Select.Option value="Sci-Fi" />
+                    <Select.Option value="Action" />
+                    <Select.Option value="Adventure" /> 
+                    <Select.Option value="Comedy" />
                         </Select>
                     </p>
                     <p><b>Description : </b><Input.TextArea value={formData.description} onChange={(e) => setformData({ ...formData, description: e.target.value })} rows={5} /></p>
