@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { message } from 'antd'; 
+import { message } from 'antd';
 import axios from '../../axios/index';
 
 export const movieHandler = createAsyncThunk(
@@ -20,13 +20,24 @@ export const movieHandler = createAsyncThunk(
 
 const initialState = {
     loading: false,
-    movie: null
+    movie: null,
+    watchList: []
 };
 
 export const movieSlice = createSlice({
     name: 'movieHandlerSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        AddWatchList : (state, action) => {
+            state.watchList.push(action.payload)
+        },
+        RemoveWatchList : (state, action) => {
+            state.watchList = state.watchList.filter(e => e !== action.payload)
+        },
+        ClearWatchList : (state, action) => {
+            state.watchList = []
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(movieHandler.pending, (state) => {
@@ -34,7 +45,7 @@ export const movieSlice = createSlice({
             })
             .addCase(movieHandler.fulfilled, (state, action) => {
                 state.loading = false;
-                state.movie = action.payload || null; 
+                state.movie = action.payload || null;
             })
             .addCase(movieHandler.rejected, (state, action) => {
                 state.loading = false;
@@ -44,9 +55,10 @@ export const movieSlice = createSlice({
 });
 
 export const ADDMOVIE = (data) => movieHandler({ method: 'post', endpoint: 'movie/add', data });
-export const GetAllMovie = () => movieHandler({ method: 'get', endpoint: `movie` }); 
-export const GetCurrentMovie = (id) => movieHandler({ method: 'get', endpoint: `movie/${id}` }); 
-export const UpdateMovie = (id,data) => movieHandler({ method: 'patch', endpoint: `movie/${id}`, data });
+export const GetAllMovie = () => movieHandler({ method: 'get', endpoint: `movie` });
+export const GetCurrentMovie = (id) => movieHandler({ method: 'get', endpoint: `movie/${id}` });
+export const UpdateMovie = (id, data) => movieHandler({ method: 'patch', endpoint: `movie/${id}`, data });
 export const DeleteMovie = (id) => movieHandler({ method: 'delete', endpoint: `movie/${id}` });
- 
+
 export default movieSlice.reducer; 
+export const { AddWatchList, RemoveWatchList, ClearWatchList } = movieSlice.actions

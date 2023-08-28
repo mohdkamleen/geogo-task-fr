@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
-import { StarOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Col, Drawer, Row, Tag } from 'antd';
+import { HeartFilled, HeartOutlined, StarOutlined } from '@ant-design/icons';
+import { Avatar, Button, Card, Col, Drawer, Row, Space, Tag } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddWatchList, RemoveWatchList } from '../../redux/slice/movie';
 const { Meta } = Card;
 
 const MovieCard = ({ data }) => {
+    const { watchList } = useSelector(state => state.movie)
     const [drawer, setDrawer] = useState()
+    const dispatch = useDispatch()
 
     return (
-        <>
+        <> 
             <Card
                 style={{
                     width: 300,
@@ -19,13 +23,20 @@ const MovieCard = ({ data }) => {
                     />
                 }
                 actions={[
-                    <span><StarOutlined key="star" /> {data.ratings}</span>,
+                     
+                   watchList.map(e => e._id).includes(data._id)
+                   ? <HeartFilled key="fheart" onClick={() => dispatch(RemoveWatchList(data))} />
+                   : <HeartOutlined key="heart" onClick={() => dispatch(AddWatchList(data))} />,
+                
                     <span>{((data.runtime - data.runtime % 60) / 60 < 10 && "0") + (data.runtime - data.runtime % 60) / 60 + "h " + data.runtime % 60 + "m"}</span>,
                     <Button onClick={() => setDrawer(data)} size='small' ghost type='primary'>More</Button>,
                 ]}
             >
-                <Meta 
-                    title={data.movie_name}
+                <Meta
+                    title={<Space style={{ display: "flex", justifyContent: "space-between" }}>
+                        <span>{data.movie_name}</span>
+                        <span><StarOutlined key="star" /> {data.ratings}</span>
+                    </Space>}
                     description={data.description.substring(0, 50) + " ....... "}
                 />
             </Card>
@@ -62,7 +73,7 @@ const MovieCard = ({ data }) => {
                     <p><b>Release Date : </b>{data.release_date}</p>
                     <p><b>Director : </b>{data.director}</p>
                     <p><b>Producer : </b>{data.producer}</p>
-                    <p><b>Tags : </b>{data?.genre.map((e,i) => (<Tag key={i} color="magenta">{e}</Tag>))}</p>
+                    <p><b>Tags : </b>{data?.genre.map((e, i) => (<Tag key={i} color="magenta">{e}</Tag>))}</p>
                     <p><b>Description : </b>{data.description}</p>
 
                 </Card>

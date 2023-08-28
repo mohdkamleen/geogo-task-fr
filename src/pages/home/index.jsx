@@ -2,7 +2,7 @@ import { Button, Empty, Input, Segmented, Spin } from 'antd'
 import { Header } from 'antd/es/layout/layout'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import MovieCard from './card.component'
+import MovieCard from './movie.component'
 import HomeHeader from './header.component'
 
 const Home = () => {
