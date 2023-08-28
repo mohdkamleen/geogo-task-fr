@@ -101,7 +101,7 @@ const Admin = () => {
           onChange={setFilter}
         />
         <Space>
-          <Input placeholder='Search name' value={inputFilter} onChange={(e) => setInputFilter(e.target.value)} style={{ width: "250px" }} /> &nbsp;
+          <Input placeholder='Search movie name' value={inputFilter} onChange={(e) => setInputFilter(e.target.value)} style={{ width: "250px" }} /> &nbsp;
           <Button type='primary' onClick={() => setAddMovie(true)}>Create New</Button>
         </Space>
       </div>
